@@ -1,0 +1,57 @@
+/* src/index.css */
+:root {
+  /* Color Palette - Professional Academic */
+  --primary: #1e40af;       /* Deep Blue for Trust */
+  --primary-hover: #1d4ed8; /* Brighter blue for actions */
+  --accent: #2563eb;        /* Accent color */
+  
+  /* Neutral Grays */
+  --bg-body: #f3f4f6;       /* Light gray background */
+  --bg-card: #ffffff;
+  --text-main: #1f2937;     /* Almost black */
+  --text-muted: #6b7280;    /* Gray for subtitles */
+  --border: #e5e7eb;
+  
+  /* Status Colors (Crucial for Queues) */
+  --status-available: #10b981; /* Green */
+  --status-busy: #f59e0b;      /* Amber */
+  --status-meeting: #3b82f6;   /* Blue */
+  --status-offline: #ef4444;   /* Red */
+
+  /* Shadows & Rounds - The 'Modern' touch */
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+input {
+  font-family: 'Inter', sans-serif;
+}

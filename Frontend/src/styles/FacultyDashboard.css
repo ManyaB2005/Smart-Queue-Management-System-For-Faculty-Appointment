@@ -1,0 +1,41 @@
+/* Frontend/src/styles/FacultyDashboard.css */
+* { box-sizing: border-box; }
+body { margin: 0; background-color: #f1f5f9; font-family: 'Segoe UI', sans-serif; }
+
+.dashboard-layout { display: flex; flex-direction: column; min-height: 100vh; }
+
+/* NAV BAR */
+.top-nav { background: #1e293b; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; }
+
+/* MAIN CONTENT */
+.dashboard-content { padding: 30px 40px; }
+
+/* HEADER */
+.faculty-header { background: white; padding: 25px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #e2e8f0; margin-bottom: 25px; }
+
+/* THE SPLIT GRID - This is the fix for your alignment */
+.layout-split { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 25px; 
+  align-items: start;
+}
+
+/* CARDS */
+.active-session-panel, .waiting-queue-panel { 
+  background: white; 
+  padding: 25px; 
+  border-radius: 12px; 
+  border: 1px solid #e2e8f0; 
+  min-height: 400px;
+}
+
+/* BUTTONS */
+.queue-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 30px; }
+.btn-action { padding: 14px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.btn-next { background: #3b82f6; color: white; }
+.btn-next:hover { background: #2563eb; }
+.btn-pause { background: #f1f5f9; color: #475569; }
+
+/* STUDENT TOKEN */
+.token-massive { font-size: 50px; font-weight: 800; color: #16a34a; text-align: center; margin: 20px 0; }
