@@ -1,129 +1,128 @@
-/* Frontend/src/styles/StudentDashboard.css */
-
+/* Core Layout */
 .dashboard-container {
-  min-height: 100vh;
-  background-color: #f4f7f9;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
   font-family: 'Inter', system-ui, sans-serif;
-  padding: 40px;
+  color: #1e293b;
 }
 
+/* Header */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
-  border-bottom: 2px solid #e2e8f0;
   padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.dashboard-header h1 {
-  color: #1e293b;
-  font-size: 28px;
-  margin: 0;
+.student-greeting {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #3b82f6; /* Matching your primary blue theme */
+  margin-bottom: 4px;
 }
 
-.faculty-list h2 { color: #475569; margin-bottom: 20px; }
+.dashboard-header h1 { margin: 0; font-size: 28px; font-weight: 700; color: #0f172a; }
+.subtitle { margin: 4px 0 0 0; color: #64748b; font-size: 14px; }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
+.logout-btn {
+  display: flex; align-items: center; gap: 8px;
+  background: white; border: 1px solid #cbd5e1;
+  padding: 10px 16px; border-radius: 8px;
+  cursor: pointer; color: #475569; font-weight: 600;
+  transition: all 0.2s;
+}
+.logout-btn:hover { background: #f8fafc; color: #ef4444; border-color: #fca5a5; }
+
+
+
+/* Controls & Search */
+.controls-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.controls-section h2 { font-size: 20px; margin: 0; color: #0f172a;}
+
+.search-box { position: relative; width: 320px; }
+.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #94a3b8; }
+.search-box input {
+  width: 100%; padding: 12px 12px 12px 42px;
+  border: 1px solid #cbd5e1; border-radius: 8px;
+  font-size: 14px; outline: none; transition: border-color 0.2s;
+}
+.search-box input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+
+/* Bento Grid */
+.bento-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px;
 }
 
 .faculty-card {
-  background: white;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #3b82f6;
+  background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;
+  padding: 24px; transition: all 0.2s ease; cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); display: flex; flex-direction: column;
 }
+.faculty-card:hover { transform: translateY(-4px); box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.1); border-color: #cbd5e1; }
 
-.faculty-card h3 {
-  margin: 0 0 10px 0;
-  color: #0f172a;
-  font-size: 20px;
-}
+.card-top { display: flex; justify-content: flex-end; margin-bottom: 16px; }
 
-.status {
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  text-transform: capitalize;
-}
+.status-badge { padding: 6px 12px; border-radius: 99px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;}
+.status-badge.available { background: #dcfce7; color: #166534; }
+.status-badge.busy { background: #fef08a; color: #854d0e; }
+.status-badge.in-meeting { background: #fee2e2; color: #991b1b; }
+.status-badge.out-of-office { background: #f1f5f9; color: #475569; }
 
-.status.available { background: #dcfce7; color: #166534; }
-.status.busy { background: #fef08a; color: #854d0e; }
-.status.in-meeting { background: #ffedd5; color: #9a3412; }
-.status.out-of-office { background: #fee2e2; color: #991b1b; }
+.card-body h3 { margin: 0 0 4px 0; font-size: 1.25rem; color: #0f172a; }
+.department { color: #64748b; font-size: 0.9rem; margin: 0 0 20px 0; }
 
-.join-btn {
-  width: 100%;
-  padding: 12px;
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.join-btn:hover { background-color: #2563eb; }
-.join-btn:disabled { background-color: #cbd5e1; cursor: not-allowed; }
+.card-stats { display: flex; gap: 16px; border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: auto; }
+.stat { display: flex; align-items: center; gap: 6px; color: #3b82f6; font-size: 0.9rem; font-weight: 600; background: #eff6ff; padding: 6px 12px; border-radius: 8px;}
 
-.active-queue-card {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  color: white;
-  border-radius: 16px;
-  padding: 40px;
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-}
+.empty-state { grid-column: 1 / -1; text-align: center; padding: 60px; color: #64748b; font-size: 1.1rem; background: #f8fafc; border-radius: 16px; border: 1px dashed #cbd5e1;}
 
-.active-queue-card h2 { font-size: 24px; margin-bottom: 30px; }
-.highlight { display: block; font-size: 64px; font-weight: 900; color: #60a5fa; margin-top: 10px; }
+/* Card Action Buttons */
+.card-actions { margin-top: 20px; border-top: 1px solid #f1f5f9; padding-top: 16px; }
 
-.queue-stats {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-bottom: 40px;
-}
+.btn-quick-join { width: 100%; padding: 12px; background: #2563eb; color: white; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 0.95rem; }
+.btn-quick-join:hover:not(:disabled) { background: #1d4ed8; }
+.btn-quick-join:disabled { background: #cbd5e1; cursor: not-allowed; }
 
-.stat-box {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px 40px;
-  border-radius: 12px;
-}
+.btn-joined { width: 100%; padding: 12px; background: #dcfce7; color: #166534; border-radius: 8px; border: none; font-weight: 600; cursor: default; font-size: 0.95rem; }
+.btn-disabled { width: 100%; padding: 12px; background: #f8fafc; color: #94a3b8; border: 1px dashed #cbd5e1; border-radius: 8px; font-weight: 600; cursor: not-allowed; font-size: 0.95rem; }
 
-.stat-box p { margin: 0 0 5px 0; color: #94a3b8; font-size: 14px; text-transform: uppercase; }
-.stat-box h3 { margin: 0; font-size: 32px; color: white; }
+/* Banner Actions */
+.banner-actions { display: flex; align-items: center; gap: 20px; }
+.cancel-banner-btn { background: rgba(255,255,255,0.05); color: #fca5a5; border: 1px solid rgba(252, 165, 165, 0.2); padding: 10px 16px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-weight: 600; transition: 0.2s; }
+.cancel-banner-btn:hover { background: rgba(239, 68, 68, 0.2); color: white; border-color: #ef4444; }
 
-.leave-btn {
-  background-color: #ef4444;
-  color: white;
-  border: none;
-  padding: 12px 30px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.dashboard-header { display: flex; justify-content: space-between; align-items: center; }
-.logout-btn { display: flex; align-items: center; gap: 8px; background: #fee2e2; color: #b91c1c; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; }
-.controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.controls select { padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1; }
-.back-btn { background: none; border: none; color: #64748b; cursor: pointer; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; }
-.join-btn.active { background: #10b981; } /* Green for 'Already Joined' */
+.in-card-token { background: #0f172a; color: white; padding: 12px 16px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; cursor: default; }
+.token-label { font-size: 0.85rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; }
+.token-value { font-size: 1.2rem; color: #60a5fa; letter-spacing: 0.5px; }
 
-/* Add this to your CSS */
-.details-page { padding: 40px; display: flex; flex-direction: column; align-items: center; background: #f8fafc; min-height: 100vh; }
-.content-card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); width: 100%; max-width: 500px; }
-.stats-pill { background: #eff6ff; color: #1d4ed8; padding: 8px 16px; border-radius: 20px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; margin: 20px 0; }
-.join-btn { width: 100%; padding: 16px; background: #2563eb; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-.join-btn:hover { background: #1d4ed8; }
-.token-display { background: #0f172a; color: white; padding: 25px; border-radius: 12px; text-align: center; }
-.token-display span { font-size: 2rem; color: #60a5fa; display: block; }
-.cancel-btn { background: #ef4444; color: white; border: none; padding: 10px 20px; border-radius: 8px; margin-top: 15px; cursor: pointer; }
-.back-btn { margin-bottom: 20px; border: none; background: none; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+/* Card Action Buttons & Token Display */
+.card-actions { margin-top: 20px; border-top: 1px solid #f1f5f9; padding-top: 16px; }
+
+.btn-quick-join { width: 100%; padding: 12px; background: #2563eb; color: white; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 0.95rem; }
+.btn-quick-join:hover:not(:disabled) { background: #1d4ed8; }
+.btn-quick-join:disabled { background: #cbd5e1; cursor: not-allowed; }
+
+.btn-disabled { width: 100%; padding: 12px; background: #f8fafc; color: #94a3b8; border: 1px dashed #cbd5e1; border-radius: 8px; font-weight: 600; cursor: not-allowed; font-size: 0.95rem; }
+
+/* In-Card Active State Styling */
+.active-card { border-color: #3b82f6; box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15); }
+
+.in-card-active-state { background: #0f172a; border-radius: 12px; padding: 20px; margin-top: 10px; cursor: default; }
+
+.token-data-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; }
+
+.token-label { display: block; font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 4px; }
+.token-value-large { font-size: 2.5rem; font-weight: 800; color: #60a5fa; line-height: 1; }
+
+.wait-time-col { text-align: right; }
+.wait-value { font-size: 1.25rem; font-weight: 600; color: white; }
+
+.btn-cancel-in-card { width: 100%; display: flex; justify-content: center; align-items: center; gap: 8px; background: rgba(239, 68, 68, 0.1); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); padding: 10px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; margin-bottom: 12px; }
+.btn-cancel-in-card:hover { background: rgba(239, 68, 68, 0.2); color: white; border-color: #ef4444; }
+
+.view-details-link { display: flex; justify-content: center; align-items: center; gap: 4px; color: #94a3b8; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: 0.2s; }
+.view-details-link:hover { color: white; }

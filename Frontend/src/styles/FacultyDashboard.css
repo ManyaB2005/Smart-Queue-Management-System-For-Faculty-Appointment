@@ -1,41 +1,298 @@
-/* Frontend/src/styles/FacultyDashboard.css */
-* { box-sizing: border-box; }
-body { margin: 0; background-color: #f1f5f9; font-family: 'Segoe UI', sans-serif; }
-
-.dashboard-layout { display: flex; flex-direction: column; min-height: 100vh; }
-
-/* NAV BAR */
-.top-nav { background: #1e293b; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; }
-
-/* MAIN CONTENT */
-.dashboard-content { padding: 30px 40px; }
-
-/* HEADER */
-.faculty-header { background: white; padding: 25px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #e2e8f0; margin-bottom: 25px; }
-
-/* THE SPLIT GRID - This is the fix for your alignment */
-.layout-split { 
-  display: grid; 
-  grid-template-columns: 1fr 1fr; 
-  gap: 25px; 
-  align-items: start;
+/* Core Layout */
+.faculty-layout {
+  min-height: 100vh;
+  background-color: #f4f7f6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1e293b;
 }
 
-/* CARDS */
-.active-session-panel, .waiting-queue-panel { 
-  background: white; 
-  padding: 25px; 
-  border-radius: 12px; 
-  border: 1px solid #e2e8f0; 
-  min-height: 400px;
+/* Navigation Bar */
+.faculty-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 16px 32px;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* BUTTONS */
-.queue-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 30px; }
-.btn-action { padding: 14px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
-.btn-next { background: #3b82f6; color: white; }
-.btn-next:hover { background: #2563eb; }
-.btn-pause { background: #f1f5f9; color: #475569; }
+.nav-brand h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #0f172a;
+}
 
-/* STUDENT TOKEN */
-.token-massive { font-size: 50px; font-weight: 800; color: #16a34a; text-align: center; margin: 20px 0; }
+.nav-brand span {
+  color: #64748b;
+  font-weight: 400;
+}
+
+.nav-profile {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.user-greeting {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid #cbd5e1;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #475569;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-logout:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+/* Main Content Area */
+.faculty-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+/* General Bento Card Style */
+.bento-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e2e8f0;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.card-header h3 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  color: #0f172a;
+}
+
+/* Top Status Panel */
+.status-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.status-header h3 { margin: 0 0 4px 0; font-size: 20px; }
+.status-header .subtitle { margin: 0; color: #64748b; font-size: 14px; }
+
+.status-toggles {
+  display: flex;
+  gap: 12px;
+}
+
+.status-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.status-btn.inactive { background: #f1f5f9; color: #64748b; border-color: #e2e8f0; }
+.status-btn.inactive:hover { background: #e2e8f0; }
+
+.status-btn.available { background: #dcfce7; color: #166534; border-color: #22c55e; }
+.status-btn.busy { background: #fef08a; color: #854d0e; border-color: #eab308; }
+.status-btn.in-meeting { background: #fee2e2; color: #991b1b; border-color: #ef4444; }
+.status-btn.out-of-office { background: #f3e8ff; color: #6b21a8; border-color: #a855f7; }
+
+/* Bento Grid */
+.faculty-bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* Active Session Panel */
+.active-session {
+  display: flex;
+  flex-direction: column;
+}
+
+.queue-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.queue-toggle.active { background: #fee2e2; color: #dc2626; }
+.queue-toggle.paused { background: #dcfce7; color: #166534; }
+
+.current-student-display {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.token-massive {
+  font-size: 48px;
+  font-weight: 800;
+  color: #3b82f6;
+  letter-spacing: -1px;
+}
+
+.student-name {
+  font-size: 20px;
+  color: #475569;
+  margin-bottom: 32px;
+}
+
+.btn-complete {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-complete:hover { background: #059669; }
+
+.btn-call-next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #0f172a;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: auto;
+  transition: background 0.2s;
+}
+
+.btn-call-next:hover:not(:disabled) { background: #1e293b; }
+.btn-call-next:disabled { background: #cbd5e1; cursor: not-allowed; }
+
+/* Empty State */
+.empty-state {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  padding: 40px 0;
+}
+
+.empty-icon { margin-bottom: 16px; opacity: 0.5; }
+
+/* Waiting Queue List */
+.queue-count {
+  background: #f1f5f9;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.queue-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Custom Scrollbar */
+.queue-list::-webkit-scrollbar { width: 6px; }
+.queue-list::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+.queue-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+.queue-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  transition: border-color 0.2s;
+}
+
+.queue-item:hover { border-color: #cbd5e1; }
+
+.queue-rank {
+  font-size: 18px;
+  font-weight: 700;
+  color: #cbd5e1;
+  width: 40px;
+}
+
+.queue-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.queue-info .token {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.queue-info .name {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.queue-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #94a3b8;
+  font-weight: 500;
+}

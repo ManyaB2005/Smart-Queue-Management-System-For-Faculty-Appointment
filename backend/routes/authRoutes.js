@@ -1,12 +1,10 @@
-// routes/authRoutes.js
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs'); // Changed to bcryptjs to match your installed package
 const jwt = require('jsonwebtoken');
 const db = require('../config/db');
 
 const router = express.Router();
 
-// --- REGISTER ---
 router.post('/register', async (req, res) => {
     try {
         const { role, name, email, password, phone, usn } = req.body;
@@ -25,7 +23,7 @@ router.post('/register', async (req, res) => {
             [role, name, email, hashedPassword, phone || null, finalUsn]
         );
 
-        const token = jwt.sign({ id: result.insertId, role, name }, process.env.JWT_SECRET, { expiresIn: '8h' });
+        const token = jwt.sign({ id: result.insertId, role, name }, process.env.JWT_SECRET || 'super_secret_key', { expiresIn: '8h' });
         res.status(201).json({ message: "Registration successful!", token });
 
     } catch (error) {
@@ -34,7 +32,6 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// --- LOGIN ---
 router.post('/login', async (req, res) => {
     try {
         const { email, password, role } = req.body;
@@ -45,8 +42,8 @@ router.post('/login', async (req, res) => {
         const isMatch = await bcrypt.compare(password, users[0].password_hash);
         if (!isMatch) return res.status(401).json({ message: "Invalid credentials." });
 
-        const token = jwt.sign({ id: users[0].id, role: users[0].role, name: users[0].name }, process.env.JWT_SECRET, { expiresIn: '8h' });
-        res.status(200).json({ message: "Login successful!", token });
+        const token = jwt.sign({ id: users[0].id, role: users[0].role, name: users[0].name }, process.env.JWT_SECRET || 'super_secret_key', { expiresIn: '8h' });
+        res.status(200).json({ message: "Login successful!", token, user: { id: users[0].id, name: users[0].name, role: users[0].role } });
 
     } catch (error) {
         res.status(500).json({ message: "Server error during login." });

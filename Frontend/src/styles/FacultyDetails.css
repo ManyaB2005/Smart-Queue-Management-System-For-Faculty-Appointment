@@ -1,0 +1,111 @@
+/* =========================================================
+   FACULTY DETAILS PAGE - MODERN UI
+   ========================================================= */
+.modern-details-page {
+  background-color: #f1f5f9;
+  min-height: 100vh;
+  padding: 40px;
+  font-family: 'Inter', system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-header {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 20px;
+}
+
+.nav-back-btn {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  transition: all 0.2s;
+}
+
+.nav-back-btn:hover { background: #f8fafc; color: #0f172a; }
+
+/* Integrated Panel Layout */
+.integrated-panel {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr; /* Split layout: Left info, Right action */
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+/* Left: Faculty Info */
+.faculty-profile-section {
+  padding: 50px 40px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.avatar-large {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.profile-text h1 { margin: 0 0 12px 0; font-size: 2rem; color: #0f172a; }
+
+.meta-tags { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+.tag { display: flex; align-items: center; gap: 6px; font-size: 0.9rem; color: #64748b; background: #f1f5f9; padding: 6px 12px; border-radius: 6px; }
+
+.live-status-pill { display: inline-flex; align-items: center; gap: 8px; background: #eff6ff; color: #1d4ed8; padding: 10px 16px; border-radius: 99px; font-size: 0.95rem; }
+
+/* Right: Action Area */
+.action-section {
+  background: #f8fafc;
+  padding: 50px 40px;
+  border-left: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Join Prompt */
+.join-prompt-card { width: 100%; }
+.join-prompt-card h3 { margin: 0 0 10px 0; color: #0f172a; font-size: 1.5rem; }
+.join-prompt-card p { color: #64748b; line-height: 1.5; margin-bottom: 24px; }
+.btn-primary-large { width: 100%; background: #2563eb; color: white; border: none; padding: 16px; border-radius: 10px; font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+.btn-primary-large:hover { background: #1d4ed8; transform: translateY(-1px); }
+
+/* Token Card */
+.modern-token-card { background: #0f172a; color: white; width: 100%; border-radius: 16px; padding: 32px; text-align: center; box-shadow: 0 15px 30px rgba(15, 23, 42, 0.2); }
+.token-header { text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; color: #94a3b8; font-weight: 600; margin-bottom: 12px; }
+.token-id { font-size: 3.5rem; font-weight: 900; color: #60a5fa; margin-bottom: 30px; letter-spacing: -1px; }
+
+.metrics-row { display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; margin-bottom: 24px; }
+.metric { display: flex; flex-direction: column; gap: 4px; padding: 0 20px; }
+.metric-label { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; }
+.metric-value { font-size: 1.5rem; font-weight: 700; color: white; }
+.metric-value small { font-size: 0.9rem; font-weight: 400; color: #cbd5e1; }
+.divider { width: 1px; height: 40px; background: rgba(255,255,255,0.1); padding: 0; }
+
+.btn-cancel { width: 100%; background: transparent; color: #f87171; border: 1px solid rgba(248, 113, 113, 0.3); padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.btn-cancel:hover { background: rgba(248, 113, 113, 0.1); border-color: #f87171; }
