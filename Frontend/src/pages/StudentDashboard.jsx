@@ -12,7 +12,6 @@ const StudentDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [studentName, setStudentName] = useState('');
   
-  // ADDED 1: State to hold the student's active queue
   const [activeQueue, setActiveQueue] = useState(null);
 
   const fetchFaculties = useCallback(async () => {
@@ -31,7 +30,6 @@ const StudentDashboard = () => {
 
       setStudentName(payload.name || 'Student');
 
-      // ADDED 2: Fetch both faculties AND the student's status at the same time
       const [facultyRes, statusRes] = await Promise.all([
         axios.get('http://localhost:5000/api/queue/faculties'),
         axios.get(`http://localhost:5000/api/queue/check-status/${payload.id}`)
@@ -102,19 +100,41 @@ const StudentDashboard = () => {
         {filteredFaculties.length > 0 ? (
           filteredFaculties.map((faculty) => {
             
-            // ADDED 3: The math logic to subtract 1 ONLY if it is your queue
             const isMyQueue = activeQueue && activeQueue.faculty_id === faculty.id;
-            const displayCount = isMyQueue ? Math.max(0, faculty.queueCount - 1) : faculty.queueCount;
+            const isAvailable = faculty.faculty_status === 'Available';
+            
+            // MATH FIX: Calculate exact people ahead
+            let peopleAhead = 0;
+            if (isMyQueue) {
+              const activeInside = activeQueue.activeCount || 0;
+              const myPos = activeQueue.position || 1;
+              peopleAhead = activeInside + (myPos - 1);
+            } else {
+              const activeInside = faculty.activeCount || 0;
+              const waiting = faculty.queueCount || 0;
+              peopleAhead = activeInside + waiting;
+            }
+
             const waitText = isMyQueue ? "ahead of you" : "waiting";
+            const waitTimeDisplay = peopleAhead === 0 ? "No wait" : `~${peopleAhead * 10} mins`;
 
             return (
               <div 
                 key={faculty.id} 
-                className="faculty-card"
-                onClick={() => navigate(`/faculty-details/${faculty.id}`)}
+                className={`faculty-card ${!isAvailable && !isMyQueue ? 'disabled-card' : ''}`}
+                onClick={() => {
+                  if (isAvailable || isMyQueue) {
+                    navigate(`/faculty-details/${faculty.id}`);
+                  }
+                }}
+                style={{ 
+                  opacity: isAvailable || isMyQueue ? 1 : 0.6, 
+                  cursor: isAvailable || isMyQueue ? 'pointer' : 'not-allowed',
+                  transition: 'all 0.3s ease'
+                }}
               >
                 <div className="card-top">
-                  <span className={`status-badge ${(faculty.faculty_status || 'available').toLowerCase().replace(' ', '-')}`}>
+                  <span className={`status-badge ${(faculty.faculty_status || 'available').toLowerCase().replace(/ /g, '-')}`}>
                     {faculty.faculty_status || 'Available'}
                   </span>
                 </div>
@@ -126,13 +146,13 @@ const StudentDashboard = () => {
                   <div className="card-stats">
                     <div className="stat">
                       <Users size={16} />
-                      {/* ADDED 4: Use the math variables here */}
-                      <span>{displayCount} {waitText}</span>
+                      <span>{peopleAhead} {waitText}</span>
                     </div>
                     <div className="stat" style={{ color: '#8b5cf6', background: '#f5f3ff' }}>
                       <Clock size={16} />
-                      {/* ADDED 5: Use the math variable here */}
-                      <span>~{displayCount * 10} mins</span>
+                      <span style={{ fontWeight: peopleAhead === 0 ? '600' : 'normal' }}>
+                        {waitTimeDisplay}
+                      </span>
                     </div>
                   </div>
                   

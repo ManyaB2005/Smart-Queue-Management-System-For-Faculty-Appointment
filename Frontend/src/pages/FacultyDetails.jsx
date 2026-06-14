@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { ArrowLeft, Users, MapPin, BookOpen } from 'lucide-react';
+import { ArrowLeft, Users, BookOpen } from 'lucide-react';
 import '../styles/FacultyDetails.css'; 
 
 const FacultyDetails = () => {
@@ -28,12 +28,18 @@ const FacultyDetails = () => {
         const existingQueue = statusRes.data.activeQueue;
         if (existingQueue) {
           if (String(existingQueue.faculty_id) === String(id)) {
+            
+            // MATH FIX: Explicitly handle 0 so it doesn't trigger the fallback.
+            // If estimatedWait is physically 0, it uses 0. Otherwise fallback to position math.
+            const calculatedWait = existingQueue.estimatedWait !== undefined && existingQueue.estimatedWait !== null 
+              ? existingQueue.estimatedWait 
+              : Math.max(0, (existingQueue.position - 1) * 10);
+
             setActiveQueue({
               isHere: true,
               queueId: existingQueue.id,
               tokenNumber: existingQueue.token_number,
-              // Calculate wait time based ONLY on position
-              estimatedWait: existingQueue.estimatedWait || (existingQueue.position * 10),
+              estimatedWait: calculatedWait,
               position: existingQueue.position
             });
           } else {
@@ -62,14 +68,16 @@ const FacultyDetails = () => {
         reason: 'General Visit'
       });
       
-      // Calculate position based on the CURRENT count
       const newPosition = data.count + 1;
+      
+      // MATH FIX: When joining, if you are position 1, your wait is 0. 
+      const estimatedWaitTime = Math.max(0, (newPosition - 1) * 10);
 
       setActiveQueue({
         isHere: true,
         queueId: res.data.data.queueId,
-        tokenNumber: res.data.token || res.data.data.tokenNumber, // Fallback if API response varies
-        estimatedWait: newPosition * 10,
+        tokenNumber: res.data.token || res.data.data.tokenNumber,
+        estimatedWait: estimatedWaitTime,
         position: newPosition
       });
       
@@ -91,11 +99,9 @@ const FacultyDetails = () => {
 
   const initials = data.faculty?.name ? data.faculty.name.substring(0, 2).toUpperCase() : 'PR';
 
-  // --- THE MATH FIX ---
   const isMyQueue = activeQueue && activeQueue.isHere;
   const displayCount = isMyQueue ? Math.max(0, data.count - 1) : data.count;
   const waitText = isMyQueue ? "ahead of you" : "students waiting";
-  // ------------------
 
   return (
     <div className="modern-details-page">
@@ -114,7 +120,6 @@ const FacultyDetails = () => {
               <span className="tag"><BookOpen size={14}/> Engineering</span>
             </div>
             <div className="live-status-pill">
-              {/* Uses the adjusted displayCount and waitText */}
               <Users size={16} /> <strong>{displayCount}</strong> {waitText}
             </div>
           </div>
@@ -123,7 +128,6 @@ const FacultyDetails = () => {
         <div className="action-section">
           {activeQueue ? (
             activeQueue.isHere ? (
-              /* SHOWS IF JOINED THIS QUEUE */
               <div className="modern-token-card">
                 <div className="token-header">Your Digital Token</div>
                 <div className="token-id">{activeQueue.tokenNumber}</div>
@@ -135,13 +139,15 @@ const FacultyDetails = () => {
                   <div className="metric divider"></div>
                   <div className="metric">
                     <span className="metric-label">Est. Wait</span>
-                    <span className="metric-value">{activeQueue.estimatedWait} <small>min</small></span>
+                    <span className="metric-value">
+                      {/* Displays 'No wait' instead of 0 min */}
+                      {activeQueue.estimatedWait === 0 ? "No wait" : `${activeQueue.estimatedWait} min`}
+                    </span>
                   </div>
                 </div>
                 <button className="btn-cancel" onClick={handleCancelQueue}>Cancel Appointment</button>
               </div>
             ) : (
-              /* SHOWS IF JOINED A DIFFERENT QUEUE */
               <div className="join-prompt-card">
                 <h3>Queue Active Elsewhere</h3>
                 <p>You are currently waiting in the queue for <strong>{activeQueue.facultyName}</strong>. You must cancel that appointment before joining a new one.</p>
@@ -151,7 +157,6 @@ const FacultyDetails = () => {
               </div>
             )
           ) : (
-            /* SHOWS IF NOT JOINED ANYWHERE */
             <div className="join-prompt-card">
               <h3>Queue Status: Open</h3>
               <p>Reserve your spot to meet with {data.faculty?.name}.</p>
