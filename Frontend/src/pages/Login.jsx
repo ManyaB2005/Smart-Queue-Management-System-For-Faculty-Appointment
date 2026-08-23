@@ -39,9 +39,23 @@ const Login = () => {
         role: role
       });
 
-      // Save token and route user
-      localStorage.setItem('token', response.data.token);
-      navigate(role === 'student' ? '/student' : '/faculty'); 
+      if (isRegistering) {
+  alert('Registration successful! Please login.');
+  setIsRegistering(false);
+
+  setFormData({
+    name: '',
+    usn: '',
+    phone: '',
+    email: '',
+    password: ''
+  });
+
+  return;
+}
+
+localStorage.setItem('token', response.data.token);
+navigate(role === 'student' ? '/student' : '/faculty');
     } catch (err) {
       setError(err.response?.data?.message || 'Authentication failed. Please try again.');
     }

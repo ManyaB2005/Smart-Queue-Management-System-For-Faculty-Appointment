@@ -1,0 +1,4 @@
+faculty_id,appointment_type,people_ahead_when_joined,queue_length_when_joined,hour,day_of_week,actual_duration
+2,PROJECT,0,0,16,7,72
+3,OTHER,0,0,16,7,80
+3,PROJECT,0,0,21,7,176

@@ -296,3 +296,19 @@
   color: #94a3b8;
   font-weight: 500;
 }
+.btn-analytics {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: none;
+  padding: 9px 14px;
+  border-radius: 8px;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-analytics:hover {
+  background: #e0e7ff;
+}
