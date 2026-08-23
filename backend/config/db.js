@@ -14,12 +14,16 @@ const pool = mysql.createPool({
 
     database: process.env.DB_NAME,
 
+    ssl: {
+        minVersion: 'TLSv1.2',
+        rejectUnauthorized: true
+    },
+
     waitForConnections: true,
 
     connectionLimit: 10,
 
     queueLimit: 0
-
 });
 
 
