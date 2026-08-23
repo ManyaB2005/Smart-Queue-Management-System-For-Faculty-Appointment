@@ -370,10 +370,7 @@ try {
         // --------------------------------------------------
 
         const estimatedWait =
-    await getEstimatedWait(
-        facultyId,
-        result.insertId
-    );
+    (peopleAheadWhenJoined || 0) * (predictedDuration || 0);
 
 const newEntry = {
     queueId: result.insertId,
