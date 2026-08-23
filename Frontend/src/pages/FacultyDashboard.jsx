@@ -153,11 +153,11 @@ const FacultyDashboard = () => {
     }
 
     const socket = io(
-      'http://localhost:5000',
-      {
-        transports: ['websocket']
-      }
-    );
+  import.meta.env.VITE_API_URL,
+  {
+    transports: ['websocket']
+  }
+);
 
     console.log(
       'Connecting faculty socket:',

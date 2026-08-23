@@ -87,7 +87,7 @@ console.log(
   }, [fetchFaculties]);
 
   useEffect(() => {
-    const socket = io('http://localhost:5000');
+    const socket = io(import.meta.env.VITE_API_URL);
 
     socket.on('dashboard_update', () => {
       fetchFaculties();

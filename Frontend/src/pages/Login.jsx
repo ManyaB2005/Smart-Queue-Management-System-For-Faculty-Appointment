@@ -28,9 +28,9 @@ const Login = () => {
     setError('');
 
     // CORRECTED: Point to the /auth/ routes
-    const endpoint = isRegistering 
-      ? 'http://localhost:5000/api/auth/register' 
-      : 'http://localhost:5000/api/auth/login';
+   const endpoint = isRegistering
+  ? `${import.meta.env.VITE_API_URL}/api/auth/register`
+  : `${import.meta.env.VITE_API_URL}/api/auth/login`;
     
     try {
       // CORRECTED: Send formData and role to the correct endpoint

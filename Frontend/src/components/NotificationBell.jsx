@@ -24,7 +24,7 @@ const NotificationBell = () => {
 
     if (payload.role !== 'student') return;
 
-    const socket = io('http://localhost:5000');
+    const socket = io(import.meta.env.VITE_API_URL);
 
     socket.on('connect', () => {
       console.log('🔔 Notification socket connected');
