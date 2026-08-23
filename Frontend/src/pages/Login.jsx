@@ -9,7 +9,8 @@ import {
   Phone,
   User as UserIcon,
   Eye,
-  EyeOff
+  EyeOff,
+  GraduationCap
 } from 'lucide-react';
 
 import '../styles/Login.css';
@@ -21,6 +22,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  // Form State
   const [formData, setFormData] = useState({
     name: '',
     usn: '',
@@ -96,34 +98,38 @@ const Login = () => {
 
       <div className="login-card">
 
-        {/* Logo / Brand */}
+        {/* Brand */}
         <div className="brand-section">
-          <div className="brand-icon">
-            <Users size={26} />
+
+          <div className="brand-logo">
+            <GraduationCap size={28} strokeWidth={2.2} />
           </div>
 
-          <h1>Smart Queue</h1>
+          <div className="brand-name">
+            Smart Queue
+          </div>
 
-          <p>
-            {isRegistering
-              ? 'Create your account and join the virtual queue.'
-              : 'Manage your appointments smarter.'}
+          <p className="brand-tagline">
+            Smart appointments. Less waiting.
           </p>
+
         </div>
 
         {/* Header */}
         <div className="card-header">
-          <h2>
+
+          <h1>
             {isRegistering
-              ? 'Create an Account'
-              : 'Welcome Back'}
-          </h2>
+              ? 'Create your account'
+              : 'Welcome back'}
+          </h1>
 
           <p>
             {isRegistering
-              ? 'Fill in your details to get started.'
-              : 'Sign in to continue to your dashboard.'}
+              ? 'Join Smart Queue and manage your faculty appointments easily.'
+              : 'Sign in to manage your appointments and queue.'}
           </p>
+
         </div>
 
         {/* Role Selector */}
@@ -135,7 +141,7 @@ const Login = () => {
             onClick={() => setRole('student')}
           >
             <Users size={18} />
-            Student
+            <span>Student</span>
           </button>
 
           <button
@@ -143,80 +149,91 @@ const Login = () => {
             className={role === 'faculty' ? 'active' : ''}
             onClick={() => setRole('faculty')}
           >
-            <Users size={18} />
-            Faculty
+            <GraduationCap size={18} />
+            <span>Faculty</span>
           </button>
 
         </div>
 
+        {/* Form */}
         <form
           onSubmit={handleSubmit}
           className="login-form"
         >
 
+          {/* Error */}
           {error && (
             <div className="error-banner">
               {error}
             </div>
           )}
 
-          {/* Registration fields */}
+          {/* Registration Fields */}
           {isRegistering && (
             <>
 
+              {/* Full Name */}
               <div className="input-field">
+
                 <label>Full Name</label>
 
                 <div className="input-wrapper">
+
                   <UserIcon
                     className="input-icon"
-                    size={19}
+                    size={18}
                   />
 
                   <input
                     type="text"
                     name="name"
                     required
-                    placeholder="John Doe"
+                    placeholder="Enter your full name"
                     value={formData.name}
                     onChange={handleInputChange}
                   />
+
                 </div>
+
               </div>
 
+              {/* USN */}
               {role === 'student' && (
                 <div className="input-field">
-                  <label>
-                    USN
-                  </label>
+
+                  <label>University Serial Number</label>
 
                   <div className="input-wrapper">
+
                     <Hash
                       className="input-icon"
-                      size={19}
+                      size={18}
                     />
 
                     <input
                       type="text"
                       name="usn"
                       required
-                      placeholder="1XX20CS001"
+                      placeholder="Enter your USN"
                       value={formData.usn}
                       onChange={handleInputChange}
                     />
+
                   </div>
+
                 </div>
               )}
 
+              {/* Phone */}
               <div className="input-field">
-                <label>
-                  Phone Number
-                </label>
+
+                <label>Phone Number</label>
 
                 <div className="input-wrapper">
+
                   <Phone
                     className="input-icon"
-                    size={19}
+                    size={18}
                   />
 
                   <input
@@ -227,7 +244,13 @@ const Login = () => {
                     value={formData.phone}
                     onChange={handleInputChange}
                   />
+
                 </div>
+
+                <span className="field-hint">
+                  Used for queue notifications and alerts
+                </span>
+
               </div>
 
             </>
@@ -242,7 +265,7 @@ const Login = () => {
 
               <Mail
                 className="input-icon"
-                size={19}
+                size={18}
               />
 
               <input
@@ -267,7 +290,7 @@ const Login = () => {
 
               <Lock
                 className="input-icon"
-                size={19}
+                size={18}
               />
 
               <input
@@ -292,9 +315,9 @@ const Login = () => {
                 }
               >
                 {showPassword ? (
-                  <EyeOff size={19} />
+                  <EyeOff size={18} />
                 ) : (
-                  <Eye size={19} />
+                  <Eye size={18} />
                 )}
               </button>
 
@@ -318,7 +341,7 @@ const Login = () => {
 
         </form>
 
-        {/* Switch Login/Register */}
+        {/* Switch Auth */}
         <div className="auth-switch">
 
           <span>
@@ -333,9 +356,14 @@ const Login = () => {
           >
             {isRegistering
               ? 'Sign In'
-              : 'Register Here'}
+              : 'Create an account'}
           </button>
 
+        </div>
+
+        {/* Footer */}
+        <div className="login-footer">
+          <span>Smart Queue Management System</span>
         </div>
 
       </div>

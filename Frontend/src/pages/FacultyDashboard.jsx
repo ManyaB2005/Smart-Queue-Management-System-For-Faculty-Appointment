@@ -2,19 +2,17 @@ import React, { useState, useEffect, useCallback } from 'react';
 import api from '../api/axios';
 import { useNavigate } from 'react-router-dom';
 import {
-  LogOut,
-  User,
   Users,
   Play,
   CheckCircle,
   Pause,
   CircleStop,
   ChevronRight,
-  Clock,
-  BarChart3
+  Clock
 } from 'lucide-react';
 import { io } from 'socket.io-client';
 import '../styles/FacultyDashboard.css';
+import FacultyMenu from '../components/FacultyMenu';
 
 const FacultyDashboard = () => {
   const navigate = useNavigate();
@@ -23,6 +21,7 @@ const FacultyDashboard = () => {
   const [isQueuePaused, setIsQueuePaused] = useState(false);
   const [currentStudent, setCurrentStudent] = useState(null);
   const [queue, setQueue] = useState([]);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const [facultyName, setFacultyName] = useState('Loading...');
   const [facultyId, setFacultyId] = useState(null);
@@ -396,47 +395,30 @@ const FacultyDashboard = () => {
           NAVIGATION
       ================================================= */}
 
-      <nav className="faculty-nav">
+    <FacultyMenu
+  isOpen={menuOpen}
+  setIsOpen={setMenuOpen}
+  onAnalytics={handleAnalytics}
+  onLogout={handleLogout}
+/>
 
-        <div className="nav-brand">
-          <h2>
-            Smart Queue
-            <span> | Faculty Desk</span>
-          </h2>
-        </div>
+<nav className="faculty-nav">
 
-        <div className="nav-profile">
+  <div className="nav-brand">
 
-          <span className="user-greeting">
-            <User size={18} />
-            Prof. {facultyName}
-          </span>
+    <span className="faculty-greeting">
+      Hello, Prof. {facultyName} 👋
+    </span>
 
-          {/* ANALYTICS BUTTON */}
+    <h2>Faculty Dashboard</h2>
 
-          <button
-            type="button"
-            onClick={handleAnalytics}
-            className="btn-analytics"
-          >
-            <BarChart3 size={18} />
-            <span>Analytics</span>
-          </button>
+    <span className="faculty-subtitle">
+      Queue Management Hub
+    </span>
 
-          {/* LOGOUT */}
+  </div>
 
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="btn-logout"
-          >
-            <LogOut size={18} />
-            <span>Logout</span>
-          </button>
-
-        </div>
-
-      </nav>
+</nav>
 
       {/* =================================================
           MAIN

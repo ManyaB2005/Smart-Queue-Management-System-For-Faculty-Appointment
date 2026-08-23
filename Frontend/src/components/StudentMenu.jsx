@@ -13,7 +13,11 @@ import {
   LogOut
 } from 'lucide-react';
 
-const StudentMenu = ({ isOpen, setIsOpen, onNotifications }) => {
+const StudentMenu = ({
+  isOpen,
+  setIsOpen,
+  onNotifications
+}) => {
   const navigate = useNavigate();
 
   const handleNavigation = (path) => {
@@ -37,6 +41,7 @@ const StudentMenu = ({ isOpen, setIsOpen, onNotifications }) => {
 
   return (
     <>
+      {/* Hamburger Button */}
       <button
         className="hamburger-btn"
         onClick={() => setIsOpen(true)}
@@ -45,6 +50,7 @@ const StudentMenu = ({ isOpen, setIsOpen, onNotifications }) => {
         <Menu size={24} />
       </button>
 
+      {/* Overlay */}
       {isOpen && (
         <div
           className="menu-overlay"
@@ -52,12 +58,16 @@ const StudentMenu = ({ isOpen, setIsOpen, onNotifications }) => {
         />
       )}
 
+      {/* Sidebar */}
       <aside
         className={`student-sidebar ${
           isOpen ? 'sidebar-open' : ''
         }`}
       >
+
+        {/* Sidebar Header */}
         <div className="sidebar-header">
+
           <div>
             <h2>Smart Queue</h2>
             <span>Student Portal</span>
@@ -66,20 +76,29 @@ const StudentMenu = ({ isOpen, setIsOpen, onNotifications }) => {
           <button
             className="close-menu-btn"
             onClick={() => setIsOpen(false)}
+            aria-label="Close menu"
           >
             <X size={22} />
           </button>
+
         </div>
 
+
+        {/* Sidebar Menu */}
         <div className="sidebar-menu">
 
+          {/* Dashboard */}
           <button
-            onClick={() => handleNavigation('/student')}
+            onClick={() =>
+              handleNavigation('/student')
+            }
           >
             <Home size={19} />
             <span>Dashboard</span>
           </button>
 
+
+          {/* My Active Queue */}
           <button
             onClick={() =>
               handleNavigation('/my-queue')
@@ -89,6 +108,8 @@ const StudentMenu = ({ isOpen, setIsOpen, onNotifications }) => {
             <span>My Active Queue</span>
           </button>
 
+
+          {/* Queue History */}
           <button
             onClick={() =>
               handleNavigation('/queue-history')
@@ -98,11 +119,17 @@ const StudentMenu = ({ isOpen, setIsOpen, onNotifications }) => {
             <span>Queue History</span>
           </button>
 
-          <button onClick={handleNotifications}>
+
+          {/* Notifications */}
+          <button
+            onClick={handleNotifications}
+          >
             <Bell size={19} />
             <span>Notifications</span>
           </button>
 
+
+          {/* Smart Assistant */}
           <button
             onClick={() =>
               handleNavigation('/smart-assistant')
@@ -112,6 +139,8 @@ const StudentMenu = ({ isOpen, setIsOpen, onNotifications }) => {
             <span>Smart Assistant</span>
           </button>
 
+
+          {/* My Profile */}
           <button
             onClick={() =>
               handleNavigation('/profile')
@@ -121,9 +150,11 @@ const StudentMenu = ({ isOpen, setIsOpen, onNotifications }) => {
             <span>My Profile</span>
           </button>
 
+
+          {/* Help & Support */}
           <button
             onClick={() =>
-              handleNavigation('/help')
+              handleNavigation('/help-support')
             }
           >
             <HelpCircle size={19} />
@@ -132,12 +163,17 @@ const StudentMenu = ({ isOpen, setIsOpen, onNotifications }) => {
 
         </div>
 
+
+        {/* Sidebar Bottom */}
         <div className="sidebar-bottom">
+
           <button onClick={handleLogout}>
             <LogOut size={19} />
             <span>Logout</span>
           </button>
+
         </div>
+
       </aside>
     </>
   );

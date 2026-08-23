@@ -17,7 +17,6 @@ const StudentDashboard = () => {
   const [activeQueue, setActiveQueue] = useState(null);
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const [notificationOpen, setNotificationOpen] = useState(false);
 
   const fetchFaculties = useCallback(async () => {
     try {
@@ -103,10 +102,7 @@ console.log(
     navigate('/login');
   };
 
-  const handleNotifications = () => {
-    setMenuOpen(false);
-    setNotificationOpen(true);
-  };
+ 
 
   const filteredFaculties = faculties.filter((faculty) => {
     const name = (faculty.name || '').toLowerCase();
@@ -134,10 +130,12 @@ console.log(
     <div className="dashboard-container">
 
       <StudentMenu
-        isOpen={menuOpen}
-        setIsOpen={setMenuOpen}
-        onNotifications={handleNotifications}
-      />
+  isOpen={menuOpen}
+  setIsOpen={setMenuOpen}
+  onNotifications={() =>
+    navigate('/notifications')
+  }
+/>
 
       <header className="dashboard-header">
 
@@ -163,10 +161,7 @@ console.log(
 
         <div className="dashboard-header-actions">
 
-          <NotificationBell
-            isOpen={notificationOpen}
-            setIsOpen={setNotificationOpen}
-          />
+          <NotificationBell />
 
           <button
             onClick={handleLogout}

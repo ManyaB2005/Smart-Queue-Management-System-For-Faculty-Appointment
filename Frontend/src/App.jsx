@@ -12,6 +12,8 @@ import QueueHistory from './pages/QueueHistory';
 import FacultyAnalytics from './pages/FacultyAnalytics';
 import Notifications from './pages/Notifications';
 import SmartAssistant from './pages/SmartAssistant';
+import Profile from './pages/Profile';
+import HelpSupport from './pages/HelpSupport';
 
 function App() {
   return (
@@ -22,6 +24,10 @@ function App() {
 
         {/* Authentication */}
         <Route path="/login" element={<Login />} />
+        <Route
+  path="/help-support"
+  element={<HelpSupport />}
+/>
 
         {/* Dashboards */}
         <Route path="/student" element={<StudentDashboard />} />
@@ -46,6 +52,7 @@ function App() {
           path="/notifications"
           element={<Notifications />}
         />
+        <Route path="/profile" element={<Profile />} />
         <Route
   path="/smart-assistant"
   element={<SmartAssistant />}

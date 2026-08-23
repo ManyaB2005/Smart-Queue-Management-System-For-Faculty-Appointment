@@ -312,3 +312,367 @@
 .btn-analytics:hover {
   background: #e0e7ff;
 }
+/* =====================================================
+   FACULTY HAMBURGER MENU
+===================================================== */
+
+.faculty-hamburger-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+
+  width: 44px;
+  height: 44px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #1e293b;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  z-index: 1000;
+
+  box-shadow:
+    0 4px 12px rgba(15, 23, 42, 0.08);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.faculty-hamburger-btn:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 18px rgba(15, 23, 42, 0.12);
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.faculty-menu-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(15, 23, 42, 0.45);
+
+  z-index: 1100;
+
+  backdrop-filter: blur(2px);
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.faculty-sidebar {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 280px;
+  height: 100vh;
+
+  background: #ffffff;
+
+  z-index: 1200;
+
+  transform: translateX(-100%);
+
+  transition:
+    transform 0.3s ease;
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow:
+    8px 0 30px rgba(15, 23, 42, 0.12);
+}
+
+.faculty-sidebar.faculty-sidebar-open {
+  transform: translateX(0);
+}
+
+
+/* =====================================================
+   SIDEBAR HEADER
+===================================================== */
+
+.faculty-sidebar-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 24px 20px;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.faculty-sidebar-header h2 {
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  color: #0f172a;
+}
+
+.faculty-sidebar-header span {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 13px;
+
+  color: #64748b;
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.faculty-close-menu-btn {
+  width: 38px;
+  height: 38px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #f1f5f9;
+
+  color: #475569;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.faculty-close-menu-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+
+/* =====================================================
+   SIDEBAR MENU
+===================================================== */
+
+.faculty-sidebar-menu {
+  flex: 1;
+
+  padding: 18px 12px;
+}
+
+.faculty-sidebar-menu button {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 13px 14px;
+
+  margin-bottom: 5px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: #475569;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.faculty-sidebar-menu button:hover {
+  background: #eff6ff;
+
+  color: #2563eb;
+
+  transform: translateX(2px);
+}
+
+
+/* =====================================================
+   SIDEBAR BOTTOM
+===================================================== */
+
+.faculty-sidebar-bottom {
+  padding: 15px 12px;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+.faculty-sidebar-bottom button {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 13px 14px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: #dc2626;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.faculty-sidebar-bottom button:hover {
+  background: #fef2f2;
+
+  color: #b91c1c;
+}
+
+
+/* =====================================================
+   FACULTY HEADER
+===================================================== */
+
+.faculty-nav {
+  display: flex;
+
+  align-items: center;
+
+  min-height: 110px;
+
+  max-width: 1060px;
+
+  margin: 0 auto;
+
+  padding: 24px 20px 20px;
+
+  box-sizing: border-box;
+
+  background: transparent;
+
+  border-bottom: 1px solid #e2e8f0;
+
+  box-shadow: none;
+}
+
+.nav-brand {
+  margin-left: 62px;
+}
+
+.faculty-greeting {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #3b82f6;
+
+  font-size: 15px;
+
+  font-weight: 600;
+}
+
+.nav-brand h2 {
+  margin: 0;
+
+  font-size: 28px;
+
+  font-weight: 700;
+
+  color: #0f172a;
+}
+
+.faculty-subtitle {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .faculty-hamburger-btn {
+    top: 16px;
+    left: 16px;
+  }
+
+  .faculty-sidebar {
+    width: 270px;
+  }
+
+  .faculty-nav {
+    min-height: 125px;
+
+    padding:
+      24px
+      18px
+      18px;
+  }
+
+  .nav-brand {
+    margin-left: 58px;
+  }
+
+  .nav-brand h2 {
+    font-size: 24px;
+  }
+
+  .faculty-greeting {
+    font-size: 14px;
+  }
+}
